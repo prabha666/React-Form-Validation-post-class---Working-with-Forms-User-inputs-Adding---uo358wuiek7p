@@ -12,11 +12,20 @@ function App() {
  /**
   * code here
   */
-
+  const fnameRef = useRef();
+  const emailRef = useRef();
+  const[error,setError]=useState('');
+  const submitForm=(event)=>{
+    event.preventDefault();
+if(!emailRef.current.value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+  setError('Email is invalid');
+  return;
+}
+  }
   return(
     <div className="App">
-      <h1>How About Them Apples</h1>
-      <form>
+       <h1>How About Them Apples</h1>
+      <form onSubmit={submitForm}>
         <fieldset>
           <label>
             <p>First Name</p>
@@ -24,20 +33,22 @@ function App() {
             <br></br>
             <p>Email</p>
             <input id='lname' name="name"   ref={emailRef}/>
-            {error && <h2 style={{color: 'red'}}>{error}</h2>}
+            <h2 style={{color: 'red'}}>{error}</h2>
           </label>
         </fieldset>
 
-        <button id='submit' type="submit">Submit</button>
+        <button id='submit' type="submit" >Submit</button>
       </form>
-      {
+      {/* {
         data.fname != undefined && (
           <div>
           <h1>{data.fname}</h1>
           <h2>{data.lname}</h2>
           </div>
-        )
-      }
+        ) 
+        }*/}
+      
+      
     </div>
   )
 }
